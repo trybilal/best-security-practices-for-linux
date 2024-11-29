@@ -58,5 +58,5 @@ The **security setup script** includes the following features:
 
 1. **Clone the repository** or download the script:
    ```bash
-   git clone https://github.com/yourusername/repository-name.git
-   cd repository-name
+   git clone https://github.com/trybilal/best-security-practices-for-linux.git
+   cd best-security-practices-for-linux
