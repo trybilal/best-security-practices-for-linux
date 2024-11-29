@@ -1,0 +1,30 @@
+
+server {
+    listen 80;
+    server_name <your-domain.com>;
+
+    root /var/www/mywebsite;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # SSL Redirection
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/<your-domain.com>/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<your-domain.com>/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256';
+    ssl_prefer_server_ciphers on;
+
+    # Security headers
+    add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload' always;
+    add_header X-Content-Type-Options 'nosniff' always;
+    add_header X-Frame-Options 'DENY' always;
+    add_header X-XSS-Protection '1; mode=block' always;
+
+    # Logging
+    access_log /var/log/nginx/mywebsite_access.log;
+    error_log /var/log/nginx/mywebsite_error.log;
+}
